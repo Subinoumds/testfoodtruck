@@ -1,0 +1,23 @@
+<h1>Éditer <%= @food_truck.name %></h1>
+<%= form_with model: @food_truck do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :cuisine_type %>
+    <%= form.text_field :cuisine_type %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+  <div>
+    <%= form.submit 'Mettre à jour' %>
+  </div>
+<% end %>
+<%= link_to 'Retour', food_truck_path(@food_truck) %>

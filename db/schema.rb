@@ -10,9 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_24_114249) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_24_125139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "food_trucks", force: :cascade do |t|
+    t.string "name"
+    t.string "cuisine_type"
+    t.text "description"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "address"
+    t.index ["user_id"], name: "index_food_trucks_on_user_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.bigint "food_truck_id", null: false
+    t.string "name"
+    t.decimal "price"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_truck_id"], name: "index_menus_on_food_truck_id"
+  end
+
+  create_table "opening_hours", force: :cascade do |t|
+    t.bigint "food_truck_id", null: false
+    t.string "day"
+    t.time "start_time"
+    t.time "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_truck_id"], name: "index_opening_hours_on_food_truck_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "food_truck_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_truck_id"], name: "index_reviews_on_food_truck_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,7 +66,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_24_114249) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
+    t.string "firstname"
+    t.string "lastname"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "food_trucks", "users"
+  add_foreign_key "menus", "food_trucks"
+  add_foreign_key "opening_hours", "food_trucks"
+  add_foreign_key "reviews", "food_trucks"
+  add_foreign_key "reviews", "users"
 end

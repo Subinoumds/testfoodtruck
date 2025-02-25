@@ -1,0 +1,6 @@
+<h1><%= @food_truck.name %></h1>
+<p><strong>Cuisine :</strong> <%= @food_truck.cuisine_type %></p>
+<p><strong>Description :</strong> <%= @food_truck.description %></p>
+<p><strong>Adresse :</strong> <%= @food_truck.address %></p>
+<%= link_to 'Éditer', edit_food_truck_path(@food_truck) %> |
+<%= link_to 'Retour', food_trucks_path %>

@@ -1,0 +1,9 @@
+<h1>Food Trucks</h1>
+<%= link_to 'Nouveau Food Truck', new_food_truck_path %>
+<ul>
+  <% @food_trucks.each do |food_truck| %>
+    <li>
+      <%= link_to food_truck.name, food_truck %>
+    </li>
+  <% end %>
+</ul>

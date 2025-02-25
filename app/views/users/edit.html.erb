@@ -1,0 +1,27 @@
+<h1>Éditer <%= @user.lastname %></h1>
+<%= form_with model: @user do |form| %>
+  <div>
+    <%= form.label :firstname %>
+    <%= form.text_field :firstname %>
+  </div>
+  <div>
+    <%= form.label :lastname %>
+    <%= form.text_field :lastname %>
+  </div>
+  <div>
+    <%= form.label :email %>
+    <%= form.text_area :email %>
+  </div>
+  <div>
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </div>
+  <div>
+    <%= form.label :password_confirmation %>
+    <%= form.text_field :password_confirmation %>
+  </div>
+  <div>
+    <%= form.submit 'Mettre à jour' %>
+  </div>
+<% end %>
+<%= link_to 'Retour', user_path(@user) %>

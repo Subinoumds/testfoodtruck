@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_path, notice: "user créé avec succès."
     else
-      render :new
+      render :new 
     end
   end
 
